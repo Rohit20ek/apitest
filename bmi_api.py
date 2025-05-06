@@ -13,23 +13,23 @@ app.add_middleware(
 )
 
 class BMIRequest(BaseModel):
-    weight: float
-    height: float
+    weight: float   # kg
+    height: float   # cm
 
 @app.post('/bmi')
-def calculate_bmi(data : BMIRequest):
-
+def calculate_bmi(data: BMIRequest):
+    # Convert cm → m
     height_in_meters = data.height / 100
-    
-    bmi = data.weight / (data.height_in_meters ** 2)
+
+    # Use the local variable, not data.height_in_meters
+    bmi = data.weight / (height_in_meters ** 2)
+
     return {
-        'bmi': round(bmi,2),
-        'category':(
-            'underweight'   if bmi < 18.5 else
-            'normal'        if bmi < 25 else
-            'overweight'    if bmi < 30 else
-            'obese' 
+        'bmi': round(bmi, 2),
+        'category': (
+            'underweight' if bmi < 18.5 else
+            'normal'      if bmi < 25   else
+            'overweight'  if bmi < 30   else
+            'obese'
         )
     }
-
-    
