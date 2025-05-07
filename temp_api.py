@@ -25,6 +25,6 @@ def convert_temperature(
         result =(temp*9/5)+32
         unit ='Fahrenheit'
     return {
-        'input': f'{temp} degrees{input_unit}',
-        'output': f'{rounds(result,2)} {unit}'
+        'input': f'{temp} degrees{unit}',
+        'output': f'{round(result,2)} {unit}'
     }
